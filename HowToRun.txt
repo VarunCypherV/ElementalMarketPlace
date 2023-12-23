@@ -1,0 +1,8 @@
+cd server nodemon index.js
+
+cd client gatsby develop
+edit index.js in pages
+https://www.gatsbyjs.com/docs/tutorial/getting-started/
+
+import { Link } from 'gatsby'
+  <Link to="/about">About</Link>
