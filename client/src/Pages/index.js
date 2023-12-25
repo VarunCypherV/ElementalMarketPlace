@@ -1,13 +1,14 @@
 import * as React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import HomePage from "./Landing/Home";
+
+import FavouritePage from "./FavouritesPage";
 
 export default function Home() {
   return (
     <>
       <GlobalStyle />
       <IndexMain>
-        <HomePage/>
+        <FavouritePage/>
       </IndexMain>
     </>
   );

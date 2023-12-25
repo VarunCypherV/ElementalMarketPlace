@@ -1,9 +1,9 @@
 import React from "react";
-import Layouts from "../../layouts/Layouts";
+import Layouts from "../layouts/Layouts";
 import { Link, graphql } from "gatsby";
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
-import StrapiHomeCarouselSection from "../../components/StrapiHomeCarouselSection";
+import StrapiHomeCarouselSection from "../components/StrapiHomeCarouselSection";
 
 function HomePage({ props }) {
   return (
@@ -17,13 +17,13 @@ function HomePage({ props }) {
       <LandingDiv>
         <NavBar2>
           <Logo>
-            <StaticImage src="../../assets/Home/ElemenWhiteHdpi.png" />
+            <StaticImage src="../assets/Home/ElemenWhiteHdpi.png" />
           </Logo>
           <Links>
             <Link>Home</Link>
             <Link>About</Link>
             <Link>Contact</Link>
-            <Link><StaticImage src="../../assets/Home/User-1.png" /></Link>
+            <Link><StaticImage src="../assets/Home/User-1.png" /></Link>
           </Links>
         </NavBar2>
         <Content>
@@ -48,7 +48,7 @@ function HomePage({ props }) {
           </TagLinesButton>
           <HeroImage>
             <Image>
-              <StaticImage src="../../assets/Home/heroImage.png" />
+              <StaticImage src="../assets/Home/heroImage.png" />
             </Image>
           </HeroImage>
         </Content>
