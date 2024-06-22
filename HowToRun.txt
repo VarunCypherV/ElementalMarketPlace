@@ -6,3 +6,7 @@ https://www.gatsbyjs.com/docs/tutorial/getting-started/
 
 import { Link } from 'gatsby'
   <Link to="/about">About</Link>
+
+
+  STRAPI
+  cd into StrapiDB anbd do npm run develop 

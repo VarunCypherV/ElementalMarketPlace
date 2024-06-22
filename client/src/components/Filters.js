@@ -53,6 +53,7 @@ const MainContainer = styled.div`
   background-color: #ffedf4;
   max-width: 15vw;
   padding: 25px;
+  min-width: 140px;
 `;
 
 const HeaderText = styled.div`

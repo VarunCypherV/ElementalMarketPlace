@@ -1,3 +1,11 @@
-SETUP UP GRAPHQL APOLLO SERVER
-SETUP FRONT END 
-npx gatsby new gatsby-starter-hello-world https://github.com/gatsbyjs/gatsby-starter-hello-world
+1) SET UP ROUTING BETWEEN PAGES and
+2) SET UP SIMPLE USER LOGIN 
+3) TqRY REDUX for statemanagement
+4) SET UP GRAPHQL - STRAPI CONNECTION
+
+4) Render Items Around
+5) Do the Items PAGES
+6) Create Such a way that when u click an item item page renders with all details
+
+7) Setup BusinessLogin
+8) Setup vendor Side Pages etc

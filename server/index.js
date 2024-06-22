@@ -1,60 +1,35 @@
 // npm pkg set type="module" allows us to use import and stuff es6
-// import { ApolloServer } from '@apollo/server';
-// import {startStandaloneServer} from '@apollo/server/standalone';
-  // "type": "module" in package json
+// "type": "module" in package json
 
-
-//EXPRESS IMPORTS
+// EXPRESS IMPORTS
 const express = require('express');
-const bodyParser= require("body-parser");
-const ejs = require("ejs");
+const bodyParser = require('body-parser');
+const ejs = require('ejs');
 const cors = require('cors');
+const app = express();
 
-//APOLLO GRAPHQL IMPORTS
-const {ApolloServer} = require('@apollo/server')
-const {startStandaloneServer} = require('@apollo/server/standalone');
-const typeDefs = require('./schema.js');
-const resolvers = require('./resolvers.js');
-// const graphqlHTTP = require('express-graphql');
-const {expressMiddleware} = require('@apollo/server/express4');
+
+const userRegisterRouter = require('./Routers/userRegisterRouter');
+const userLoginRouter = require('./Routers/userLoginRouter');
 
 // DATABASE CONNECTION
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/ApprovalSystem");
+mongoose.connect("mongodb+srv://ElementalAdmin:ElementalSecurity2004@cluster0.caesc5r.mongodb.net/");
 mongoose.connection.once('open', () => {
-    console.log('conneted to database');
+    console.log('connected to database');
 });
 
+// startServer();
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
-//SERVER SETUP
-async function startStartServer() {
-    //EXPRESS SETUP
-    const app = express();
-    app.set('view engine', 'ejs');
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(cors());
-
-    //GRAPHQL SETUP
-    console.log(typeDefs,resolvers);
-    const server = new ApolloServer({
-        typeDefs: typeDefs,
-        resolvers: resolvers 
-    });    
-    const {url} = await startStandaloneServer(server,{
-        listen: {port:4000}
-    })
-    console.log(url);
-    app.use("/graphql",expressMiddleware(server))
-
-    //ALTERNATIVE EXPRESS WAY TO START SERVER
-    // app.listen(4000 , ()=>{
-    //     console.log('listening on 4000')
-    // });
-    // await server.start();
-}
-
-startStartServer()
+// Routes
+app.use('/api', userRegisterRouter);
+app.use('/api', userLoginRouter);
 
 
-//  ! -> required field
-//Query type is default required , entry points in graph after which they r free to navigate
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

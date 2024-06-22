@@ -1,14 +1,16 @@
 import * as React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
-import FavouritePage from "./FavouritesPage";
+import ItemPage from "./ItemPage";
+import Home from "./Home";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <GlobalStyle />
       <IndexMain>
-        <FavouritePage/>
+        {/* <ItemPage /> */}
+        <Home/>
       </IndexMain>
     </>
   );
@@ -21,8 +23,8 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-
 const IndexMain = styled.div`
   margin: 0;
   padding: 0;
 `;
+

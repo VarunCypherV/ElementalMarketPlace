@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Box from "./Box";
+import { Link } from "gatsby";
 
 function LoginForm(props) {
   return (
@@ -17,12 +18,22 @@ function LoginForm(props) {
         />
       </BoxesFlex2>
       <ButtonsFlex3>
-        <FormButtonGhost>
+        {/* <FormButtonGhost>
             <p>Submit</p>
         </FormButtonGhost>
         <FormButtonNG>
             <p>Register</p>
-        </FormButtonNG>
+        </FormButtonNG> */}
+        <Link to="/Home"> {/* Use Link component to navigate to /Home */}
+          <FormButtonGhost>
+            <p>Submit</p>
+          </FormButtonGhost>
+        </Link>
+        <Link to="/Home"> {/* Use Link component to navigate to /Home */}
+          <FormButtonNG>
+            <p>Register</p>
+          </FormButtonNG>
+        </Link>
       </ButtonsFlex3>
     </MainContainer>
   );

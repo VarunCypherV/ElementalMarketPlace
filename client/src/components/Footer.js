@@ -4,7 +4,7 @@ import { StaticImage } from "gatsby-plugin-image";
 
 function Footer() {
   return (
-    <MainContainer>
+    <MainContainer id="Footer">
       <Logof1>
         <Image>
           <StaticImage src="../assets/LoginReg/Logo.png" alt="company logo" />

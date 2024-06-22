@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vendor_collections",
+  "info": {
+    "singularName": "vendor-collection",
+    "pluralName": "vendor-collections",
+    "displayName": "VendorCollection",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "VendorName": {
+      "type": "string"
+    },
+    "VendorEmail": {
+      "type": "email"
+    },
+    "IdProof": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "CompanyName": {
+      "type": "string"
+    },
+    "CompanyAddress": {
+      "type": "text"
+    },
+    "IdProofName": {
+      "type": "string"
+    },
+    "BankACNo": {
+      "type": "string"
+    },
+    "GSTNumber": {
+      "type": "string"
+    },
+    "VendorPhone": {
+      "type": "biginteger"
+    },
+    "items_collections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::items-collection.items-collection",
+      "mappedBy": "vendors"
+    }
+  }
+}

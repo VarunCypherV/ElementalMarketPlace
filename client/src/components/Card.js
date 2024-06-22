@@ -6,6 +6,9 @@ import { StaticImage } from "gatsby-plugin-image";
 function Card(props) {
   return (
     <MainContainer>
+    {props.deal?<Tag>{props.deal}
+     </Tag>:null }
+     
       <ImageSec imageUrl={props.image} />
       <DetailsSec>
         <Name>
@@ -43,8 +46,8 @@ function Card(props) {
 export default Card;
 
 const MainContainer = styled.div`
-  width: 278px;
-  height: 278px;
+  width: 240px;
+  height: 240px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -52,10 +55,11 @@ const MainContainer = styled.div`
   border-bottom-right-radius: 40px;
   overflow: hidden;
   box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.6);
+  position: relative;
 `;
 
 const ImageSec = styled.div`
-  flex: 3;
+  flex: 6;
   background-color: white;
   background-image: url(${(props) => props.imageUrl});
   background-size: cover;
@@ -69,7 +73,7 @@ const DetailsSec = styled.div`
 const Name = styled.div`
   color: black;
   margin: 5px 10px;
-  font-size: 16px;
+  font-size: 14px;
   font-family: "merienda";
   font-weight: 700;
 `;
@@ -110,7 +114,7 @@ const Striked = styled.span`
 `;
 
 const SellingPrice = styled.div`
-  font-size: 16px;
+  font-size: 14px;
   font-family: "merienda";
   font-weight: 700;
 `;
@@ -128,4 +132,21 @@ const OfferPercent = styled.div`
 const RatingContainer = styled.div`
   margin-left: 10px;
   margin-bottom: 5px;
+`;
+
+
+const MoveToCartButoon = styled.div`
+`;
+
+const Tag = styled.div`
+  position: absolute;
+  top: 0px; /* Adjust this value to your preference */
+  right: 0px; /* Adjust this value to your preference */
+  background-color: #ff0065;
+  font-size: 12px;
+  color: white;
+  font-family: "merienda";
+  padding: 2px 10px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 `;

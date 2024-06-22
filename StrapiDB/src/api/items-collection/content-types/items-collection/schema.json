@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "items_collections",
+  "info": {
+    "singularName": "items-collection",
+    "pluralName": "items-collections",
+    "displayName": "ItemsCollection",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "SP": {
+      "type": "integer"
+    },
+    "CP": {
+      "type": "integer"
+    },
+    "Description": {
+      "type": "json"
+    },
+    "Features": {
+      "type": "json"
+    },
+    "Images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "reviewId"
+    },
+    "vendors": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::vendor-collection.vendor-collection",
+      "inversedBy": "items_collections"
+    },
+    "ItemId": {
+      "type": "uid"
+    },
+    "user_collections": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::user-collection.user-collection",
+      "mappedBy": "favourites"
+    },
+    "Tags": {
+      "type": "json"
+    }
+  }
+}

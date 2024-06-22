@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 import StrapiHomeCarouselSection from "../components/StrapiHomeCarouselSection";
 
-function HomePage({ props }) {
+function Home({ props }) {
   return (
     <MainContainer>
       <OfferLine>
@@ -20,9 +20,9 @@ function HomePage({ props }) {
             <StaticImage src="../assets/Home/ElemenWhiteHdpi.png" />
           </Logo>
           <Links>
-            <Link>Home</Link>
+            <Link to="/Home">Home</Link>
             <Link>About</Link>
-            <Link>Contact</Link>
+            <a href="#Footer">Contact</a>
             <Link><StaticImage src="../assets/Home/User-1.png" /></Link>
           </Links>
         </NavBar2>
@@ -38,9 +38,10 @@ function HomePage({ props }) {
             </TagLinetext>
 
             <Buttons>
-              <GButtons>
+            <GButtons>
                 <p>Shop</p>
               </GButtons>
+
               <NGButtons>
                 <p>Discover</p>
               </NGButtons>
@@ -60,7 +61,7 @@ function HomePage({ props }) {
   );
 }
 
-export default HomePage;
+export default Home;
 
 // export const query = graphql`
 //   query MyQuery {

@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reviews",
+  "info": {
+    "singularName": "review",
+    "pluralName": "reviews",
+    "displayName": "Review",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Rating": {
+      "type": "integer",
+      "max": 5,
+      "required": true,
+      "min": 0
+    },
+    "Review": {
+      "type": "text"
+    },
+    "Date": {
+      "type": "date"
+    },
+    "ImagesVideo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "reviewId": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::items-collection.items-collection",
+      "inversedBy": "reviews"
+    },
+    "user_collection": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::user-collection.user-collection"
+    }
+  }
+}

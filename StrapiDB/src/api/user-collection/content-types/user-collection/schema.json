@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_collections",
+  "info": {
+    "singularName": "user-collection",
+    "pluralName": "user-collections",
+    "displayName": "UserCollection",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "items_visited": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::items-collection.items-collection",
+      "inversedBy": "user_collections"
+    },
+    "Cart": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::items-collection.items-collection",
+      "inversedBy": "user_collections"
+    },
+    "favourites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::items-collection.items-collection",
+      "inversedBy": "user_collections"
+    },
+    "userId": {
+      "type": "uid"
+    }
+  }
+}
