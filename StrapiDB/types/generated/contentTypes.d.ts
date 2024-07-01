@@ -917,6 +917,36 @@ export interface ApiUserCollectionUserCollection extends Schema.CollectionType {
   };
 }
 
+export interface ApiUserIdUserId extends Schema.CollectionType {
+  collectionName: 'user_ids';
+  info: {
+    singularName: 'user-id';
+    pluralName: 'user-ids';
+    displayName: 'UserId';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    userid: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-id.user-id',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-id.user-id',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiVendorCollectionVendorCollection
   extends Schema.CollectionType {
   collectionName: 'vendor_collections';
@@ -983,6 +1013,7 @@ declare module '@strapi/types' {
       'api::items-collection.items-collection': ApiItemsCollectionItemsCollection;
       'api::review.review': ApiReviewReview;
       'api::user-collection.user-collection': ApiUserCollectionUserCollection;
+      'api::user-id.user-id': ApiUserIdUserId;
       'api::vendor-collection.vendor-collection': ApiVendorCollectionVendorCollection;
     }
   }

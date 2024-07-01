@@ -1,11 +1,12 @@
-1) SET UP ROUTING BETWEEN PAGES and
-2) SET UP SIMPLE USER LOGIN 
-3) TqRY REDUX for statemanagement
-4) SET UP GRAPHQL - STRAPI CONNECTION
+1)LOGIN - REGISTER - STRAPI RETURN ID ON LOGIN
+2) SET UP ROUTING BETWEEN PAGES (with auth token)
 
-4) Render Items Around
-5) Do the Items PAGES
-6) Create Such a way that when u click an item item page renders with all details
+3) TqRY REDUX for statemanagement
+
+4) Render Items in Pages
+5) Do the Items PAGES and link it
+6) Filters
+7) Cart and Checkout 
 
 7) Setup BusinessLogin
 8) Setup vendor Side Pages etc
