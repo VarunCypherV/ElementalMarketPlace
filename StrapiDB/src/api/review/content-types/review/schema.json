@@ -41,10 +41,10 @@
       "target": "api::items-collection.items-collection",
       "inversedBy": "reviews"
     },
-    "user_collection": {
+    "user_id": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::user-collection.user-collection"
+      "target": "api::user-id.user-id"
     }
   }
 }

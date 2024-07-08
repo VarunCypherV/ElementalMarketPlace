@@ -1,12 +1,20 @@
-1)LOGIN - REGISTER - STRAPI RETURN ID ON LOGIN
-2) SET UP ROUTING BETWEEN PAGES (with auth token)
-
-3) TqRY REDUX for statemanagement
-
-4) Render Items in Pages
 5) Do the Items PAGES and link it
 6) Filters
 7) Cart and Checkout 
+8) AUth token 
+
+
+
+
+
 
 7) Setup BusinessLogin
 8) Setup vendor Side Pages etc
+
+
+
+# Find the PID using port 3000
+netstat -ano | findstr :3000
+
+# Kill the process using the PID (replace PID with the actual process ID found above)
+taskkill /PID <PID> /F

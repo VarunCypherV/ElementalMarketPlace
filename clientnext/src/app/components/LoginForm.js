@@ -32,7 +32,7 @@ function LoginForm(props) {
 
         // Store the JWT token
         localStorage.setItem('token', token);
-
+        localStorage.setItem('id', data.userid);
         // Navigate to the home page on successful login
         router.push('/home2');
       } else {

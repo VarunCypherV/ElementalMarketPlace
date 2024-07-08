@@ -38,7 +38,7 @@ function Footer() {
               <Image
                 src="/assets/NavBarFooter/emailArrow.png"
                 alt="email icon"
-                width={500} height={500}
+                width={50} height={25}
               />
             </Image2>
           </IconContainer>

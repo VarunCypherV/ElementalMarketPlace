@@ -3,5 +3,28 @@
 }
 
 .containerClass {
-    padding:10px;
-  }
+    padding: 10px;
+}
+
+/* Carousel.css */
+.react-multi-carousel-arrow {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.react-multiple-carousel__arrow {
+    background-color: transparent;
+}
+
+.containerClass:hover .react-multi-carousel-arrow {
+    opacity: 1;
+}
+
+.react-multiple-carousel__arrow::before {
+    color: transparent;
+    transition: color 0.3s; /* Add a transition for color change */
+}
+
+.react-multiple-carousel__arrow:hover::before {
+    color: white;
+}

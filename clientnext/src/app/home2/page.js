@@ -18,13 +18,13 @@ function Home({ props }) {
       <LandingDiv>
         <NavBar2>
           <Logo>
-            <Image src="/assets/Home/ElemenWhiteHdpi.png" width={500} height={500} />
+            <Image src="/assets/Home/ElemenWhiteHdpi.png" width={150} height={100} />
           </Logo>
           <Links>
             <Link href="/Home">Home</Link>
             <Link href="#">About</Link>
             <a href="#Footer">Contact</a>
-            <Link href="#"><Image src="/assets/Home/User-1.png" width={500} height={500} /></Link>
+            <Link href="#"><Image src="/assets/Home/User-1.png" width={30} height={30} /></Link>
           </Links>
         </NavBar2>
         <Content>
@@ -50,7 +50,7 @@ function Home({ props }) {
           </TagLinesButton>
           <HeroImage>
             <ImageContainer>
-              <Image src="/assets/Home/heroImage.png" width={500} height={500} />
+              <Image src="/assets/Home/heroImage.png" width="500" height="500"  />
             </ImageContainer>
           </HeroImage>
         </Content>
@@ -160,7 +160,8 @@ const HeroImage = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  
+  width: 100%; /* Ensure image container takes full width */
+  height: 100%; /* Ensure image container takes full height */
 `;
 
 const Buttons = styled.div`

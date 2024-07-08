@@ -9,7 +9,6 @@ function Card(props) {
     <MainContainer>
     {props.deal?<Tag>{props.deal}
      </Tag>:null }
-     
       <ImageSec imageUrl={props.image} />
       <DetailsSec>
         <Name>

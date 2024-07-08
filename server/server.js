@@ -2,7 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Import cors module
+
 const userAuthRouter = require('./_Routers/userAuth'); // Adjust the path as necessary
+const tagCardRouter = require('./_Routers/tagcard'); // Adjust the path as
+const reviewsRouter = require('./_Routers/reviews'); // Adjust the path as
+const userDeetsRouter = require('./_Routers/userDeets'); //
+
 require('dotenv').config();
 
 const app = express();
@@ -26,6 +31,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use('/auth', userAuthRouter);
+app.use('/tagcard', tagCardRouter);
+app.use('/reviews', reviewsRouter);
+app.use('/userDeets', userDeetsRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

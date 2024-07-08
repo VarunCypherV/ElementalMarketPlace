@@ -9,19 +9,19 @@ function Rating({ stars, number, altText }) {
 
   switch (stars) {
     case "1":
-      imageSrc = "/assets/public/Components/1Star.png";
+      imageSrc = "/assets/Components/1Star.png";
       break;
     case "2":
-      imageSrc = '/assets/public/Components/2Star.png';
+      imageSrc = '/assets/Components/2Star.png';
       break;
     case "3":
-      imageSrc = '/assets/public/Components/3Star.png';
+      imageSrc = '/assets/Components/3Star.png';
       break;
     case "4":
-      imageSrc = '/assets/public/Components/4Star.png';
+      imageSrc = '/assets/Components/4Star.png';
       break;
     case "5":
-      imageSrc = '/assets/public/Components/5Star.png';
+      imageSrc = '/assets/Components/5Star.png';
       break;
     default:
       break;

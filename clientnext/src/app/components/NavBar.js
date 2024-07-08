@@ -1,33 +1,41 @@
-'use client'
+"use client";
 import React from "react";
 import styled from "styled-components";
-import Image from 'next/image'
+import Image from "next/image";
+import Link from "next/link";
 
 function NavBar() {
   return (
     <MainContainer>
       <LogoContainer>
         <ImageContainer>
-          <Image src="/assets/LoginReg/Logo.png" alt="company logo" width={500} height={500} />
+          <Image
+            src="/assets/LoginReg/Logo.png"
+            alt="company logo"
+            width={500}
+            height={500}
+          />
         </ImageContainer>
       </LogoContainer>
 
       <CategoryContainer>
-        <CategoryButton>
-          <CategoryButtonImg>
-          <IconCat>
-          <Image
-              src="/assets/Home/CategoryButton.png"
-              alt="company logo"
-              width={500} height={500}
-            />
-          </IconCat>
-            
-          </CategoryButtonImg>
-          <CategoryButtonText>
-            <p>Category</p>
-          </CategoryButtonText>
-        </CategoryButton>
+        <Link href="/category">
+          <CategoryButton>
+            <CategoryButtonImg>
+              <IconCat>
+                <Image
+                  src="/assets/Home/CategoryButton.png"
+                  alt="company logo"
+                  width={500}
+                  height={500}
+                />
+              </IconCat>
+            </CategoryButtonImg>
+            <CategoryButtonText>
+              <p>Category</p>
+            </CategoryButtonText>
+          </CategoryButton>
+        </Link>
       </CategoryContainer>
 
       <SearchBarContainer>
@@ -37,7 +45,8 @@ function NavBar() {
               <Image
                 src="/assets/Home/Search_alt.png"
                 alt="search icon"
-                width={500} height={500}
+                width={500}
+                height={500}
               />
             </IconImage>
           </IconContainer>
@@ -47,23 +56,38 @@ function NavBar() {
       <IconsContainer>
         <IconView>
           <Icon>
-            <Image src="/assets/Home/languageIcon.png" width={500} height={500} />
+            <Image
+              src="/assets/Home/languageIcon.png"
+              width={500}
+              height={500}
+            />
           </Icon>
         </IconView>
+
         <IconView>
-          <Icon>
-            <Image src="/assets/Home/Favorite.png"  width={500} height={500}/>
-          </Icon>
+          <Link href="/favourites">
+            <Icon>
+              <Image src="/assets/Home/Favorite.png" width={500} height={500} />
+            </Icon>
+          </Link>
         </IconView>
         <IconView>
-          <Icon>
-            <Image src="/assets/Home/Basket_alt_3.png" width={500} height={500}/>
-          </Icon>
+          <Link href="/cartcheckout">
+            <Icon>
+              <Image
+                src="/assets/Home/Basket_alt_3.png"
+                width={500}
+                height={500}
+              />
+            </Icon>
+          </Link>
         </IconView>
         <IconView>
-          <Icon>
-            <Image src="/assets/Home/User.png" width={500} height={500}/>
-          </Icon>
+          <Link href="/profileandaccounts">
+            <Icon>
+              <Image src="/assets/Home/User.png" width={500} height={500} />
+            </Icon>
+          </Link>
         </IconView>
       </IconsContainer>
     </MainContainer>
@@ -80,19 +104,19 @@ const MainContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 25px;
+  padding-bottom: 25px;
   padding-left: 50px;
 `;
 
 const LogoContainer = styled.div`
   flex: 1;
-
 `;
 
 const CategoryContainer = styled.div`
   flex: 1;
-  padding:20px;
+  padding: 20px;
   margin-right: 50px;
-  max-width: 100px;
+  max-width: 150px;
 `;
 const CategoryButton = styled.div`
   background-color: #ff0065;
@@ -101,7 +125,7 @@ const CategoryButton = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 40px;
-  padding:5px 10px;
+  padding: 5px 10px;
 `;
 
 const CategoryButtonImg = styled.div`
@@ -109,22 +133,22 @@ const CategoryButtonImg = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right:5px;
+  margin-right: 5px;
 `;
 
 const CategoryButtonText = styled.div`
   flex: 2;
   display: flex;
   align-items: center;
-  font-size:14px;
-  color:white;
+  font-size: 14px;
+  color: white;
   > p {
     margin: 0;
   }
 `;
 
 const IconCat = styled.div`
-    width:15px;
+  width: 15px;
 `;
 const SearchBarContainer = styled.div`
   flex: 3;
@@ -145,7 +169,7 @@ const ImageContainer = styled.div`
   width: 25%;
   height: 25%;
   min-width: 100px;
-  margin:auto;
+  margin: auto;
 `;
 
 const SearchContainer = styled.div`

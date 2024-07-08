@@ -848,10 +848,10 @@ export interface ApiReviewReview extends Schema.CollectionType {
       'manyToOne',
       'api::items-collection.items-collection'
     >;
-    user_collection: Attribute.Relation<
+    user_id: Attribute.Relation<
       'api::review.review',
       'oneToOne',
-      'api::user-collection.user-collection'
+      'api::user-id.user-id'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -898,7 +898,11 @@ export interface ApiUserCollectionUserCollection extends Schema.CollectionType {
       'manyToMany',
       'api::items-collection.items-collection'
     >;
-    userId: Attribute.UID;
+    user_id: Attribute.Relation<
+      'api::user-collection.user-collection',
+      'oneToOne',
+      'api::user-id.user-id'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

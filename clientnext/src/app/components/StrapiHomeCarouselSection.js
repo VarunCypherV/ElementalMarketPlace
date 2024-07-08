@@ -14,37 +14,37 @@ function StrapiHomeCarouselSection() {
         </TagLine>
         <MultiCarousels>
           <CategoryCarouselContainer>
-            <CategoryTitleContainer image={arrivalsImage}/>
+            <CategoryTitleContainer image={arrivalsImage} />
             <CarouselContainer>
-              <ItemCarousel />
+              <ItemCarousel topic={"NewArrivals"}/>
             </CarouselContainer>
           </CategoryCarouselContainer>
 
           <CategoryCarouselContainer>
             <CategoryTitleContainer image={dealsImage}/>
             <CarouselContainer>
-              <ItemCarousel />
+              <ItemCarousel  topic={"TodayDeal"} />
             </CarouselContainer>
           </CategoryCarouselContainer>
 
           <CategoryCarouselContainer>
             <CategoryTitleContainer image={arrivalsImage}/>
             <CarouselContainer>
-              <ItemCarousel />
+              <ItemCarousel topic={"Trending"}/>
             </CarouselContainer>
           </CategoryCarouselContainer>
 
           <CategoryCarouselContainer>
             <CategoryTitleContainer image={arrivalsImage}/>
             <CarouselContainer>
-              <ItemCarousel />
+              <ItemCarousel topic={"Recommended"}/>
             </CarouselContainer>
           </CategoryCarouselContainer>
 
           <CategoryCarouselContainer>
             <CategoryTitleContainer image={arrivalsImage}/>
             <CarouselContainer>
-              <ItemCarousel />
+              <ItemCarousel topic={"History"}/>
             </CarouselContainer>
           </CategoryCarouselContainer>
         </MultiCarousels>
@@ -87,6 +87,7 @@ const CategoryTitleContainer = styled.div`
   flex: 5;
   width: 240px;
   height: 240px;
+  max-width: 240px;
   @media (min-width: 700px) {
     min-width: 200px;
   }
