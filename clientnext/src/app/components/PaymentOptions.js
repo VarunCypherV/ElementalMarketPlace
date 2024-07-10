@@ -27,7 +27,7 @@ const PaymentOptions = () => {
               selectedMethod === "creditCard" ? "selectedIcon" : "defaultIcon"
             }`}
           >
-            <Image src="/assets/Components/tick.png" width={500} height={500} />
+            <Image src="/assets/Components/tick.png" width={25} height={25} />
           </span>
         </label>
       </Method>
@@ -46,7 +46,7 @@ const PaymentOptions = () => {
               selectedMethod === "netBanking" ? "selectedIcon" : "defaultIcon"
             }`}
           >
-            <Image src="/assets/Components/tick.png"  width={500} height={500}/>
+            <Image src="/assets/Components/tick.png"  width={25} height={25}/>
           </span>
         </label>
       </Method>
@@ -65,7 +65,7 @@ const PaymentOptions = () => {
               selectedMethod === "upi" ? "selectedIcon" : "defaultIcon"
             }`}
           >
-            <Image src="/assets/Components/tick.png"  width={500} height={500}/>
+            <Image src="/assets/Components/tick.png"  width={25} height={25}/>
           </span>
         </label>
       </Method>
@@ -84,7 +84,7 @@ const PaymentOptions = () => {
               selectedMethod === "emi" ? "selectedIcon" : "defaultIcon"
             }`}
           >
-            <Image src="/assets/Components/tick.png"  width={500} height={500}/>
+            <Image src="/assets/Components/tick.png"  width={25} height={25}/>
           </span>
         </label>
       </Method>
@@ -106,7 +106,7 @@ const PaymentOptions = () => {
                     : "defaultIcon"
                 }`}
               >
-                <Image src="/assets/Components/tick.png"  width={500} height={500}/>
+                <Image src="/assets/Components/tick.png"  width={25} height={25}/>
               </span>
         </label>
       </Method>

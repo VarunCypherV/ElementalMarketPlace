@@ -9,7 +9,7 @@ function AddOn(props) {
 
   const handleAddItem = () => {
     if (newItem.trim() !== "") {
-      setItems([...items, newItem]); 
+      setItems([...items, newIte1m]); 
       setNewItem("");
     }
     console.log(items);
@@ -33,13 +33,13 @@ function AddOn(props) {
           />
         </InputContainer>
         <AddIcon onClick={handleAddItem}>
-          <Image src="/assets/Components/Add_ring.png" width={500} height={500} />
+          <Image src="/assets/Components/Add_ring.png" width={25} height={25} />
         </AddIcon>
         <Items>
           {items.map((item, index) => (
             <ItemContainer key={index}>
               <RemoveIcon onClick={() => handleRemoveItem(index)}>
-                <Image src="/assets/Components/cross.png" width={500} height={500} />
+                <Image src="/assets/Components/cross.png" width={25} height={25} />
               </RemoveIcon>
               <div>{item}</div>
             </ItemContainer>

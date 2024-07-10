@@ -35,7 +35,7 @@ const DropdownComp = (props) => {
             <Image
               src="/assets/Components/Expand_down.png"
               alt="Dropdown Icon"
-              width={500} height={500}
+              width={15} height={15}
             />
           </DropdownIcon>
         </CustomDropdownHeader>

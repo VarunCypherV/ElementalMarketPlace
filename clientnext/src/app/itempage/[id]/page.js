@@ -1,12 +1,10 @@
-"use client";
-
+'use client'
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import Layout1 from "../../layouts/Layout1";
 import styled from "styled-components";
 import { FaShoppingCart, FaShoppingBag } from "react-icons/fa";
-
 
 const ItemPage = () => {
   const [item, setItem] = useState(null);
@@ -70,11 +68,11 @@ const ItemPage = () => {
       console.error("Error adding to cart:", error);
     }
   };
-  
 
   const handleDirectBuy = () => {
+    // Implement direct buy functionality if needed
+  };
 
-  }
   return (
     <Layout1>
       <MainContainer>
@@ -88,12 +86,11 @@ const ItemPage = () => {
                 onClick={() => handleImageClick(image.attributes.url)}
               />
             ))}
-
           </LeftImageContainer>
           <ImageContentContainer>
-          <MainImage src={mainImage} alt="Main item image" />
-          <ButtonContainer>
-              <BuyButton onClick={{handleDirectBuy}}>
+            <MainImage src={mainImage} alt="Main item image" />
+            <ButtonContainer>
+              <BuyButton onClick={handleDirectBuy}>
                 <FaShoppingBag size={20} style={{ marginRight: "10px" }} />
                 Buy
               </BuyButton>
@@ -103,10 +100,33 @@ const ItemPage = () => {
               </CartButton>
             </ButtonContainer>
           </ImageContentContainer>
-          
         </LeftHalf>
         <RightHalf>
           <h2>{item.Name}</h2>
+          {item.SP < item.CP ? (
+            <PriceContainer>
+              <span>SP</span>
+              <StrikedPrice>{item.CP}</StrikedPrice>
+              <OfferPercentage>
+                ({Math.round(((item.CP - item.SP) / item.CP) * 100)}% Off)
+              </OfferPercentage>
+            </PriceContainer>
+          ) : (
+            <PriceContainer>
+              <span>Price</span>
+              <span>{item.CP}</span>
+            </PriceContainer>
+          )}
+          <p>
+            <strong>Colors Available:</strong> {item.Features.Colors.join(", ")}
+          </p>
+          <p>
+            <strong>Sizes Available:</strong>{" "}
+            {item.Features.SizesAvailable.join(", ")}
+          </p>
+          <p>
+            <strong>Size:</strong> {item.Features.Size}
+          </p>
           <p>
             <strong>Brand:</strong> {item.Features.Brand}
           </p>
@@ -132,20 +152,10 @@ const ItemPage = () => {
             <strong>Material:</strong> {item.Features.Material}
           </p>
           <p>
-            <strong>Size:</strong> {item.Features.Size}
-          </p>
-          <p>
             <strong>Skill Level:</strong> {item.Features.SkillLevel}
           </p>
           <p>
             <strong>Sport:</strong> {item.Features.Sport}
-          </p>
-          <p>
-            <strong>Colors Available:</strong> {item.Features.Colors.join(", ")}
-          </p>
-          <p>
-            <strong>Sizes Available:</strong>{" "}
-            {item.Features.SizesAvailable.join(", ")}
           </p>
           <h3>Description:</h3>
           {Object.values(item.Description).map((desc, index) => (
@@ -172,7 +182,6 @@ const ItemPage = () => {
                   />
                 ))}
               </ReviewImagesContainer>
-              {/* Display additional review details as needed */}
             </ReviewContainer>
           ))}
         </RightHalf>
@@ -252,11 +261,6 @@ const ReviewImage = styled.img`
   object-fit: cover;
 `;
 
-// const ButtonContainer = styled.div`
-//   display: flex;
-//   flex-direction: row;
-// `;
-
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -268,14 +272,13 @@ const BuyButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FF0065;
+  background-color: #ff0065;
   color: white;
   padding: 10px;
-  border-radius: 5px;
-  margin-right: 25px;
-  cursor: pointer;
   border-top-left-radius: 30px;
   border-bottom-right-radius: 30px;
+  margin-right: 25px;
+  cursor: pointer;
 `;
 
 const CartButton = styled.div`
@@ -284,20 +287,33 @@ const CartButton = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  color: #FF0065;
-  border: #FF0065 1px solid;
+  color: #ff0065;
+  border: #ff0065 1px solid;
   padding: 10px;
-  border-radius: 5px;
-  margin-left:25px;
   border-top-left-radius: 30px;
   border-bottom-right-radius: 30px;
+  margin-left: 25px;
   cursor: pointer;
 `;
-
 
 const ImageContentContainer = styled.div`
   min-width: 500px;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
+`;
 
+const PriceContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StrikedPrice = styled.span`
+  margin-left: 10px;
+  text-decoration: line-through;
+  color: #888;
+`;
+
+const OfferPercentage = styled.span`
+  margin-left: 5px;
+  color: #FF0065;
 `;

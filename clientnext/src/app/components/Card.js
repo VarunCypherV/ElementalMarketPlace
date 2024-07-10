@@ -1,14 +1,13 @@
-'use client'
+"use client";
 import React from "react";
 import styled from "styled-components";
 import Rating from "./Rating";
-import Image from 'next/image'
+import Image from "next/image";
 
 function Card(props) {
   return (
     <MainContainer>
-    {props.deal?<Tag>{props.deal}
-     </Tag>:null }
+      {props.deal ? <Tag>{props.deal}</Tag> : null}
       <ImageSec imageUrl={props.image} />
       <DetailsSec>
         <Name>
@@ -29,13 +28,13 @@ function Card(props) {
           </Price>
           <Buttons>
             <div>
-            <Image
-              src="/assets/Components/BasketWhite.png"
-              alt="Basket Image"
-              width={500} height={500}
-            />
+              <Image
+                src="/assets/Components/BasketWhite.png"
+                alt="Basket Image"
+                width={500}
+                height={500}
+              />
             </div>
-            
           </Buttons>
         </PriceAndButtons>
       </DetailsSec>
@@ -100,8 +99,8 @@ const Buttons = styled.div`
   height: 100%;
   align-self: flex-end;
   padding: 10px;
-  >div{
-    margin-left:4px;
+  > div {
+    margin-left: 4px;
   }
 `;
 
@@ -134,9 +133,7 @@ const RatingContainer = styled.div`
   margin-bottom: 5px;
 `;
 
-
-const MoveToCartButoon = styled.div`
-`;
+const MoveToCartButoon = styled.div``;
 
 const Tag = styled.div`
   position: absolute;

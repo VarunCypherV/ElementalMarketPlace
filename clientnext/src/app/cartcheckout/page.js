@@ -1,106 +1,134 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { DropdownComp } from "../components/DropDown";
 import AddOn from "../components/AddOn";
 import PaymentOptions from "../components/PaymentOptions";
-import Image from 'next/image'
+import Image from "next/image";
 import Layout1 from "../layouts/Layout1";
+import axios from "axios";
 
 function CartAndCheckoutPage() {
-  const items = [
-    {
-      name: "CEAT (No- 6) Poplar Willow Cricket Bat",
-      quantity: 2,
-      price: 10,
-      itemId: 122342342,
-    },
-    {
-      name: "Example Item 2",
-      quantity: 3,
-      price: 15,
-      itemId: 987654321,
-    },
-    {
-      name: "Another Item",
-      quantity: 1,
-      price: 20,
-      itemId: 567890123,
-    },
-  ];
-  const [TotalQuantity, setTotalQuantity] = useState(0);
-  const [TotalPrice, setTotalPrice] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    let quantity = 0;
-    let price = 0;
+    const fetchData = async () => {
+      try {
+        const userid = localStorage.getItem('id'); 
+        const response = await axios.get(`http://localhost:3000/userDeets/getCart?userid=${userid}`);
+        const cartData = response.data.cart.map(item => ({
+          ...item,
+          quantity: 1  // Initialize quantity for each item
+        }));
+        setCartItems(cartData);
+  
+        // Calculate total quantity and total price
+        let quantity = cartData.length;  // Use cartData length as initial quantity
+        let price = cartData.reduce((total, item) => total + item.attributes.SP, 0); // Calculate total price
+  
+        setTotalQuantity(quantity);
+        setTotalPrice(price);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle error state here
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
 
-    items.forEach((item) => {
-      quantity += item.quantity;
-      price += item.quantity * item.price;
-    });
+  const increaseQuantity = (index) => {
+    // Increase quantity logic
+    const updatedCart = [...cartItems];
+    updatedCart[index].quantity += 1; // Assuming each item can have a quantity property
+    setCartItems(updatedCart);
 
-    setTotalQuantity(quantity);
-    setTotalPrice(price);
-  }, [items]);
+    // Recalculate total quantity and total price
+    const newQuantity = totalQuantity + 1;
+    const newPrice = totalPrice + updatedCart[index].attributes.SP;
+    setTotalQuantity(newQuantity);
+    setTotalPrice(newPrice);
+  };
+
+  const decreaseQuantity = (index) => {
+    // Decrease quantity logic
+    if (cartItems[index].quantity > 1) {
+      const updatedCart = [...cartItems];
+      updatedCart[index].quantity -= 1;
+      setCartItems(updatedCart);
+
+      // Recalculate total quantity and total price
+      const newQuantity = totalQuantity - 1;
+      const newPrice = totalPrice - updatedCart[index].attributes.SP;
+      setTotalQuantity(newQuantity);
+      setTotalPrice(newPrice);
+    }
+  };
+
+
   return (
     <Layout1>
       <MainContainer>
         <HeaderText>YOUR CART AND CHECKOUT</HeaderText>
         <DetailsContainer>
-          <OrderSummary>
-            <h1>Order Summary</h1>
+        <OrderSummary>
+        <h1>Order Summary</h1>
+        <Row>
+          <Row1>
+            <h3>Product</h3>
+            <br />
+          </Row1>
+          <Row2>
+            <h3>Quantity</h3>
+            <br />
+          </Row2>
+          <Row3>
+            <h3>Price</h3>
+            <br />
+          </Row3>
+        </Row>
+        {cartItems.map((item, index) => (
+          <RowContent key={item.id}>
+            <RowC1>
+              <h3>{item.attributes.Name}</h3>
+              <br />
+            </RowC1>
+            <RowC2>
+              {/* Quantity adjustment buttons */}
+              <button onClick={() => decreaseQuantity(index)}>-</button>
+              <h3>{item.quantity}</h3>
+              <button onClick={() => increaseQuantity(index)}>+</button>
+              <br />
+            </RowC2>
+            <RowC3>
+              <h3>{item.attributes.SP}</h3>
+              <br />
+            </RowC3>
+          </RowContent>
+        ))}
+        <SummarySection>
+          <hr />
+          <Summary>
             <Row>
               <Row1>
-                <h3>Product</h3>
+                <h3>Total Purchase Value :</h3>
                 <br />
               </Row1>
               <Row2>
-                <h3> Quantity</h3>
+                <h3>{totalQuantity}</h3>
                 <br />
               </Row2>
               <Row3>
-                <h3>Price</h3>
+                <h3>{totalPrice}</h3>
                 <br />
               </Row3>
             </Row>
-            {items.map((item, index) => (
-              <RowContent key={index}>
-                <RowC1>
-                  <h3>{item.name}</h3>
-                  <br />
-                </RowC1>
-                <RowC2>
-                  <h3>{item.quantity}</h3>
-                  <br />
-                </RowC2>
-                <RowC3>
-                  <h3>{item.price}</h3>
-                  <br />
-                </RowC3>
-              </RowContent>
-            ))}
-
-            <SummarySection>
-              <hr />
-              <Summary>
-                <Row>
-                  <Row1>
-                    <h3>Total Purchase Value :</h3>
-                    <br />
-                  </Row1>
-                  <Row2>
-                    <h3>{TotalQuantity}</h3>
-                    <br />
-                  </Row2>
-                  <Row3>
-                    <h3>{TotalPrice}</h3>
-                    <br />
-                  </Row3>
-                </Row>
-              </Summary>
-            </SummarySection>
-          </OrderSummary>
+          </Summary>
+        </SummarySection>
+      </OrderSummary>
           <PaymentsAndBilling>
             <h1>Payment And Billing</h1>
             <DropdownComp
@@ -110,12 +138,16 @@ function CartAndCheckoutPage() {
             />
             <br />
             <AddOn OutsideBoxText="Add Coupon" />
-            <h3>Payment Method</h3>
-            <PaymentOptions />
+            {/* <h3>Payment Method</h3> */}
+            {/* <PaymentOptions /> */}
             <CheckoutButton>
               <h1>Proceed To Checkout</h1>
               <ChkImage>
-                <Image src="/assets/Components/Bag.png" width={500} height={500} />
+                <Image
+                  src="/assets/Components/Bag.png"
+                  width={25}
+                  height={25}
+                />
               </ChkImage>
             </CheckoutButton>
           </PaymentsAndBilling>
@@ -137,7 +169,7 @@ const HeaderText = styled.div`
 const MainContainer = styled.div`
   flex: 1;
   padding: 50px;
-  margin-bottom:50px;
+  margin-bottom: 50px;
 `;
 
 const DetailsContainer = styled.div`
