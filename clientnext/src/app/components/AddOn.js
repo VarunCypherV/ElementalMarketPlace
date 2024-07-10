@@ -1,22 +1,26 @@
 'use client'
+ 
 import Image from 'next/image'
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function AddOn(props) {
-  const [newItem, setNewItem] = useState(""); 
-  const [items, setItems] = useState([]); 
 
+function AddOn(props) {
+  const [newItem, setNewItem] = useState("");
+  const [items, setItems] = useState([]); 
+  
   const handleAddItem = () => {
     if (newItem.trim() !== "") {
-      setItems([...items, newIte1m]); 
+      props.onAddCoupon(newItem); // Call the parent component function
+      setItems([...items, newItem]);
       setNewItem("");
     }
-    console.log(items);
   };
-
   const handleRemoveItem = (indexToRemove) => {
+    const it = items.filter((_, index) => index === indexToRemove)
     const updatedItems = items.filter((_, index) => index !== indexToRemove);
+
+    props.onRemoveCoupon(it)
     setItems(updatedItems);
   };
 
