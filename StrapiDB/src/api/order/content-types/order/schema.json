@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "order"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::user-id.user-id",
+      "inversedBy": "orders"
+    },
+    "ItemsWithQuantity": {
+      "type": "json"
+    },
+    "Price": {
+      "type": "json"
+    },
+    "Payment": {
+      "type": "json"
+    }
+  }
+}

@@ -7,6 +7,7 @@ import AddOn from "../components/AddOn";
 import Image from "next/image";
 import Layout1 from "../layouts/Layout1";
 import axios from "axios";
+import Stripe from "../components/stripe";
 
 function CartAndCheckoutPage() {
   const [cartItems, setCartItems] = useState([]);
@@ -20,6 +21,7 @@ function CartAndCheckoutPage() {
     const fetchData = async () => {
       try {
         const userid = localStorage.getItem("id");
+        console.log(`http://localhost:3000/userDeets/getCart?userid=${userid}`)
         const response = await axios.get(
           `http://localhost:3000/userDeets/getCart?userid=${userid}`
         );
@@ -28,11 +30,11 @@ function CartAndCheckoutPage() {
           quantity: 1, // Initialize quantity for each item
         }));
         setCartItems(cartData);
-
-        const addressResponse = await axios.get(
-          `http://localhost:3000/userDeets/addresses/${userid}`
-        );
-        setAddresses(addressResponse.data.addresses);
+        console.log(userid)
+        // const addressResponse = await axios.get(
+        //   `http://localhost:3000/userDeets/addresses/userid=${userid}`
+        // );
+        // setAddresses(addressResponse.data.addresses);
 
         // Calculate total quantity and total price
         let quantity = cartData.reduce(
@@ -40,8 +42,7 @@ function CartAndCheckoutPage() {
           0
         ); // Calculate total quantity
         let price = cartData.reduce(
-          (total, item) => total + item.attributes.SP * item.quantity,
-          0
+          (total, item) => total + item.attributes.SP * item.quantity,0
         ); // Calculate total price
 
         setTotalQuantity(quantity);
@@ -64,9 +65,11 @@ function CartAndCheckoutPage() {
 
     // Recalculate total quantity and total price
     const newQuantity = totalQuantity + 1;
-    const newPrice = totalPrice + updatedCart[index].attributes.SP;
+    const newPrice = displayPrice + updatedCart[index].attributes.SP;
     setTotalQuantity(newQuantity);
     setDisplayPrice(newPrice);
+
+    setTotalPrice(newPrice);
   };
 
   const decreaseQuantity = (index) => {
@@ -81,6 +84,8 @@ function CartAndCheckoutPage() {
       const newPrice = displayPrice - updatedCart[index].attributes.SP;
       setTotalQuantity(newQuantity);
       setDisplayPrice(newPrice);
+
+      setTotalPrice(newPrice);
     }
   };
 
@@ -204,8 +209,7 @@ function CartAndCheckoutPage() {
               onAddCoupon={handleAddCoupon}
               onRemoveCoupon={handleRemoveCoupon}
             />
-            {/* <h3>Payment Method</h3> */}
-            {/* <PaymentOptions /> */}
+            <Stripe/>
             <CheckoutButton>
               <h1>Proceed To Checkout</h1>
               <ChkImage>

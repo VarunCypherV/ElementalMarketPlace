@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coupons",
+  "info": {
+    "singularName": "coupon",
+    "pluralName": "coupons",
+    "displayName": "coupon"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Code": {
+      "type": "string"
+    },
+    "PercentOff": {
+      "type": "integer"
+    },
+    "AmountOff": {
+      "type": "integer"
+    },
+    "Description": {
+      "type": "text"
+    }
+  }
+}

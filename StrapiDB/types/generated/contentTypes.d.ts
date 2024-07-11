@@ -768,6 +768,39 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCouponCoupon extends Schema.CollectionType {
+  collectionName: 'coupons';
+  info: {
+    singularName: 'coupon';
+    pluralName: 'coupons';
+    displayName: 'coupon';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Code: Attribute.String;
+    PercentOff: Attribute.Integer;
+    AmountOff: Attribute.Integer;
+    Description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::coupon.coupon',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::coupon.coupon',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiItemsCollectionItemsCollection
   extends Schema.CollectionType {
   collectionName: 'items_collections';
@@ -815,6 +848,43 @@ export interface ApiItemsCollectionItemsCollection
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::items-collection.items-collection',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderOrder extends Schema.CollectionType {
+  collectionName: 'orders';
+  info: {
+    singularName: 'order';
+    pluralName: 'orders';
+    displayName: 'order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user_id: Attribute.Relation<
+      'api::order.order',
+      'manyToOne',
+      'api::user-id.user-id'
+    >;
+    ItemsWithQuantity: Attribute.JSON;
+    Price: Attribute.JSON;
+    Payment: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order.order',
       'oneToOne',
       'admin::user'
     > &
@@ -933,6 +1003,11 @@ export interface ApiUserIdUserId extends Schema.CollectionType {
   };
   attributes: {
     userid: Attribute.String & Attribute.Required;
+    orders: Attribute.Relation<
+      'api::user-id.user-id',
+      'oneToMany',
+      'api::order.order'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1014,7 +1089,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::coupon.coupon': ApiCouponCoupon;
       'api::items-collection.items-collection': ApiItemsCollectionItemsCollection;
+      'api::order.order': ApiOrderOrder;
       'api::review.review': ApiReviewReview;
       'api::user-collection.user-collection': ApiUserCollectionUserCollection;
       'api::user-id.user-id': ApiUserIdUserId;

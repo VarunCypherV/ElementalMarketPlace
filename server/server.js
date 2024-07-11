@@ -7,6 +7,7 @@ const userAuthRouter = require('./_Routers/userAuth'); // Adjust the path as nec
 const tagCardRouter = require('./_Routers/tagcard'); // Adjust the path as
 const reviewsRouter = require('./_Routers/reviews'); // Adjust the path as
 const userDeetsRouter = require('./_Routers/userDeets'); //
+const marketRouter = require('./_Routers/market'); //
 
 require('dotenv').config();
 
@@ -22,7 +23,7 @@ mongoose.connect(DB, {
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3001', // Allow requests from this origin
+  origin: ['http://localhost:3001',"https://clientnext.lcl.host:44383","https://clientnext.localhost:44383"], // Allow requests from this origin
   methods: ['GET', 'POST'], // Allow specific HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
 }));
@@ -34,6 +35,7 @@ app.use('/auth', userAuthRouter);
 app.use('/tagcard', tagCardRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/userDeets', userDeetsRouter);
+app.use('/market',marketRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
