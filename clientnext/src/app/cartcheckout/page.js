@@ -21,33 +21,39 @@ function CartAndCheckoutPage() {
     const fetchData = async () => {
       try {
         const userid = localStorage.getItem("id");
-        console.log(`http://localhost:3000/userDeets/getCart?userid=${userid}`)
-        const response = await axios.get(
-          `http://localhost:3000/userDeets/getCart?userid=${userid}`
-        );
-        const cartData = response.data.cart.map((item) => ({
-          ...item,
-          quantity: 1, // Initialize quantity for each item
-        }));
-        setCartItems(cartData);
-        console.log(userid)
-        // const addressResponse = await axios.get(
-        //   `http://localhost:3000/userDeets/addresses/userid=${userid}`
+        // const response = await axios.get(
+        //   `http://localhost:3000/userDeets/getCart?userid=${userid}`
         // );
-        // setAddresses(addressResponse.data.addresses);
+        // if(response.statusCode === 200){
+        //   const cartData = response.data.cart.map((item) => ({
+        //   ...item,
+        //   quantity: 1, // Initialize quantity for each item
+        // }));
+        // setCartItems(cartData);
+        // }
+        // else{
+        //   setCartItems([]);
+        // }
+        
+        const addressResponse = await axios.get(
+          `http://localhost:3000/userDeets/addresses?userId=${userid}`
+        );
 
+        setAddresses(addressResponse.data);
+        
         // Calculate total quantity and total price
-        let quantity = cartData.reduce(
-          (total, item) => total + item.quantity,
-          0
-        ); // Calculate total quantity
-        let price = cartData.reduce(
-          (total, item) => total + item.attributes.SP * item.quantity,0
-        ); // Calculate total price
+        // let quantity = cartData.reduce(
+        //   (total, item) => total + item.quantity,
+        //   0
+        // ); // Calculate total quantity
+        
+        // let price = cartData.reduce(
+        //   (total, item) => total + item.attributes.SP * item.quantity,0
+        // ); // Calculate total price
 
-        setTotalQuantity(quantity);
-        setTotalPrice(price);
-        setDisplayPrice(price);
+        // setTotalQuantity(quantity);
+        // setTotalPrice(price);
+        // setDisplayPrice(price);
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error state here
@@ -57,6 +63,7 @@ function CartAndCheckoutPage() {
     fetchData();
   }, []);
 
+  
   const increaseQuantity = (index) => {
     // Increase quantity logic
     const updatedCart = [...cartItems];

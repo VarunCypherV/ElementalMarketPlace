@@ -1,15 +1,22 @@
 'use client'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Image from 'next/image'
 
 
 const DropdownComp = (props) => {
-  const [selectedOption, setSelectedOption] = useState(props.InsideBox);
+
+
+  const [selectedOption, setSelectedOption] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [newItem, setNewItem] = useState(""); // State to store newly added item
-  const [options, setOptions] = useState(props.options); // State to manage dropdown options
+  const [options, setOptions] = useState([]); // State to manage dropdown options
+  useEffect(() => {
+    setSelectedOption(props.InsideBox);
+    setOptions(props.options.addresses || []);
+  }, [props.InsideBox, props.options.addresses]);
 
+  
   const handleSelection = (option) => {
     setSelectedOption(option);
   };

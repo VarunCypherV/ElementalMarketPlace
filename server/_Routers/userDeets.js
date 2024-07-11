@@ -10,7 +10,7 @@ const STRAPI_TOKEN = process.env.STRAPI_TOKEN;
 const UserDetails = require("../_Models/UserDetails");
 
 
-router.get("/addresses",upload.none(), async (req, res) => {
+router.get("/addresses", async (req, res) => {
   const { userId } = req.query;
 
   try {
@@ -99,7 +99,6 @@ router.post("/addToCart", upload.none(), async (req, res) => {
 
 router.get("/getCart", upload.none(), async (req, res) => {
   const { userid } = req.query; 
-
   try {
     if (!userid) {
       return res.status(400).json({ message: "All fields are required" });
@@ -126,7 +125,7 @@ router.get("/getCart", upload.none(), async (req, res) => {
     }
 
     const foundId = searchResponse.data.data[0].id;
-
+    
     // Step 2: Use the found ID to get user collection data
     const collectionResponse = await axios.get(
       `${STRAPI_URL}/api/user-collections/${foundId}?populate=*`,
@@ -136,11 +135,9 @@ router.get("/getCart", upload.none(), async (req, res) => {
         },
       }
     );
-
+    
     const userCollection = collectionResponse.data.data.attributes;
-    console.log(userCollection.Cart.data)
-
-    res.status(200).json({ cart: userCollection.Cart.data });
+      res.status(200).json({ cart: userCollection.Cart.data });
   } catch (error) {
     // console.error("Error adding to cart:", error);
     res
