@@ -23,7 +23,6 @@ function ItemCarousel({ topic }) {
           const userid = localStorage.getItem('id');
           const response = await axios.get(`http://localhost:3000/userDeets/getVisited?userid=${userid}`);
           setItems(response.data.Visited);
-          console.log("response:",response)
    
         }
         
@@ -114,7 +113,6 @@ function ItemCarousel({ topic }) {
     >
       {items.map(item => (
         <div key={item.id} onClick={() => handleCardClick(item.id)}>
-        {console.log(topic,item)}
           <Card
             sp={item.attributes.SP}
             cp={item.attributes.CP}

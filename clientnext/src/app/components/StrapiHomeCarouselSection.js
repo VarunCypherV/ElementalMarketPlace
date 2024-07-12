@@ -2,11 +2,19 @@
 import React from "react";
 import styled from "styled-components";
 import ItemCarousel from "./ItemCarousel";
+import { useRouter } from "next/navigation";
 
 const arrivalsImage = "/assets/Home/arrivals.png";
 const dealsImage = "/assets/Home/Deals.png";
 
 function StrapiHomeCarouselSection() {
+  const router = useRouter();
+
+  const handleOnClick = (type) => () => {
+    localStorage.setItem('category',type);
+    router.push(`/category`); // Navigate to category page with type parameter
+  };
+
     return (
       <MainContainer id="#MainShop">
         <TagLine>
@@ -14,35 +22,35 @@ function StrapiHomeCarouselSection() {
         </TagLine>
         <MultiCarousels>
           <CategoryCarouselContainer>
-            <CategoryTitleContainer image={arrivalsImage} />
+            <CategoryTitleContainer image={arrivalsImage} onClick={handleOnClick("NewArrivals")}/>
             <CarouselContainer>
               <ItemCarousel topic={"NewArrivals"}/>
             </CarouselContainer>
           </CategoryCarouselContainer>
 
           <CategoryCarouselContainer>
-            <CategoryTitleContainer image={dealsImage}/>
+            <CategoryTitleContainer image={dealsImage} onClick={handleOnClick("TodayDeal")} />
             <CarouselContainer>
               <ItemCarousel  topic={"TodayDeal"} />
             </CarouselContainer>
           </CategoryCarouselContainer>
 
           <CategoryCarouselContainer>
-            <CategoryTitleContainer image={arrivalsImage}/>
+            <CategoryTitleContainer image={arrivalsImage} onClick={handleOnClick("Trending")}/>
             <CarouselContainer>
               <ItemCarousel topic={"Trending"}/>
             </CarouselContainer>
           </CategoryCarouselContainer>
 
           <CategoryCarouselContainer>
-            <CategoryTitleContainer image={arrivalsImage}/>
+            <CategoryTitleContainer image={arrivalsImage} onClick={handleOnClick("Recommended")}/>
             <CarouselContainer>
               <ItemCarousel topic={"Recommended"}/>
             </CarouselContainer>
           </CategoryCarouselContainer>
 
           <CategoryCarouselContainer>
-            <CategoryTitleContainer image={arrivalsImage}/>
+            <CategoryTitleContainer image={arrivalsImage} onClick={handleOnClick("History")}/>
             <CarouselContainer>
               <ItemCarousel topic={"History"}/>
             </CarouselContainer>

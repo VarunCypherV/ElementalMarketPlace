@@ -1,73 +1,39 @@
-'use client'
-import React, { useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Layout1 from "../layouts/Layout1";
 import styled from "styled-components";
 import Filters from "../components/Filters";
 import StickyBox from "react-sticky-box";
 import Card from "../components/Card";
+import axios from "axios";
+import { useRouter } from "next/navigation"; // Import from next/navigation
+
 function CategoryPage() {
-  const data = [
-    {
-      offer: "true",
-      offerpercent: "70% Off",
-      mrp: "₹1179",
-      sp: "₹359",
-      name: "CEAT (No- 6) Poplar Willow Cricket Bat",
-      image:
-        "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/41Z9QaAVyaL._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_SCLZZZZZZZ_FMpng_BG255%2C255%2C255.jpg",
-    },
-    {
-      offer: "true",
-      offerpercent: "70% Off",
-      mrp: "₹1179",
-      sp: "₹35129",
-      name: "CEAT (No- 6) Poplar Willow Cricket Bat",
-      image:
-        "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/41Z9QaAVyaL._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_SCLZZZZZZZ_FMpng_BG255%2C255%2C255.jpg",
-    },
-    {
-      offer: "true",
-      offerpercent: "70% Off",
-      mrp: "₹1179",
-      sp: "₹35933",
-      name: "CEAT (No- 6) Poplar Willow Cricket Bat",
-      image:
-        "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/41Z9QaAVyaL._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_SCLZZZZZZZ_FMpng_BG255%2C255%2C255.jpg",
-    },
-    {
-      offer: "true",
-      offerpercent: "70% Off",
-      mrp: "₹1179",
-      sp: "₹352229",
-      name: "CEAT (No- 6) Poplar Willow Cricket Bat",
-      image:
-        "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/41Z9QaAVyaL._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_SCLZZZZZZZ_FMpng_BG255%2C255%2C255.jpg",
-    },
-    {
-      offer: "true",
-      offerpercent: "70% Off",
-      mrp: "₹1179",
-      sp: "₹359",
-      name: "CEAT (No- 6) Poplar Willow Cricket Bat",
-      image:
-        "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/41Z9QaAVyaL._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_SCLZZZZZZZ_FMpng_BG255%2C255%2C255.jpg",
-    },
-    {
-      offer: "true",
-      offerpercent: "70% Off",
-      mrp: "₹1179",
-      sp: "₹359",
-      name: "CEAT (No- 6) Poplar Willow Cricket Bat",
-      image:
-        "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/41Z9QaAVyaL._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_SCLZZZZZZZ_FMpng_BG255%2C255%2C255.jpg",
-    },
-  ];
+  const [items, setItems] = useState([]);
+  const type = localStorage.getItem("category");
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        if (type) {
+          const response = await axios.get(
+            `http://localhost:3000/tagcard/tagitems?tagname=${type}`
+          );
+          setItems(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+
+    fetchItems();
+  }, [type]);
 
   return (
     <Layout1>
       <MainContainer>
         <HeaderText>
-          Category: <span id="CatName"> New Arrivals</span>
+          Category: <span id="CatName">{type}</span>
         </HeaderText>
         <Content>
           <FiltersContainer>
@@ -76,19 +42,23 @@ function CategoryPage() {
             </StickyBox>
           </FiltersContainer>
           <Items>
-            {data.map((item, index) => (
-              <CardContainer>
-              <Card
-                key={index} // Adding a unique key for each Card component
-                offer={item.offer}
-                offerpercent={item.offerpercent}
-                mrp={item.mrp}
-                sp={item.sp}
-                name={item.name}
-                image={item.image}
-              />
+            {items.map((item) => (
+              <CardContainer key={item.id}>
+                <Card
+                  sp={item.attributes.SP}
+                  cp={item.attributes.CP}
+                  name={item.attributes.Name}
+                  description={item.attributes.Description}
+                  features={item.attributes.Features}
+                  image={
+                    "http://localhost:1337" +
+                    item.attributes.Images.data[0].attributes.url
+                  }
+                  offer="true"
+                  offerpercent="70% Off"
+                  mrp="₹1179"
+                />
               </CardContainer>
-              
             ))}
           </Items>
         </Content>
@@ -119,11 +89,10 @@ const Items = styled.div`
 `;
 
 const FiltersContainer = styled.div`
-margin-right:25px;
-flex-shrink: 0;
-
+  margin-right: 25px;
+  flex-shrink: 0;
 `;
 
 const CardContainer = styled.div`
-margin:10px;
+  margin: 10px;
 `;
