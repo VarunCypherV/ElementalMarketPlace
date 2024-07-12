@@ -21,39 +21,36 @@ function CartAndCheckoutPage() {
     const fetchData = async () => {
       try {
         const userid = localStorage.getItem("id");
-        // const response = await axios.get(
-        //   `http://localhost:3000/userDeets/getCart?userid=${userid}`
-        // );
-        // if(response.statusCode === 200){
-        //   const cartData = response.data.cart.map((item) => ({
-        //   ...item,
-        //   quantity: 1, // Initialize quantity for each item
-        // }));
-        // setCartItems(cartData);
-        // }
-        // else{
-        //   setCartItems([]);
-        // }
+        const response = await axios.get(
+          `http://localhost:3000/userDeets/getCart?userid=${userid}`
+        );
+    
         
+        const cartData = response.data.cart.map((item) => ({
+          ...item,
+          quantity: 1, // Initialize quantity for each item
+        }));
+        setCartItems(cartData);
+        
+    
         const addressResponse = await axios.get(
           `http://localhost:3000/userDeets/addresses?userId=${userid}`
         );
 
         setAddresses(addressResponse.data);
         
-        // Calculate total quantity and total price
-        // let quantity = cartData.reduce(
-        //   (total, item) => total + item.quantity,
-        //   0
-        // ); // Calculate total quantity
+        let quantity = cartData.reduce(
+          (total, item) => total + item.quantity,
+          0
+        ); // Calculate total quantity
         
-        // let price = cartData.reduce(
-        //   (total, item) => total + item.attributes.SP * item.quantity,0
-        // ); // Calculate total price
+        let price = cartData.reduce(
+          (total, item) => total + item.attributes.SP * item.quantity,0
+        ); // Calculate total price
 
-        // setTotalQuantity(quantity);
-        // setTotalPrice(price);
-        // setDisplayPrice(price);
+        setTotalQuantity(quantity);
+        setTotalPrice(price);
+        setDisplayPrice(price);
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error state here
@@ -216,8 +213,9 @@ function CartAndCheckoutPage() {
               onAddCoupon={handleAddCoupon}
               onRemoveCoupon={handleRemoveCoupon}
             />
-            <Stripe/>
-            <CheckoutButton>
+            <Stripe amount={displayPrice} />
+            
+            {/* <CheckoutButton>
               <h1>Proceed To Checkout</h1>
               <ChkImage>
                 <Image
@@ -226,7 +224,7 @@ function CartAndCheckoutPage() {
                   height={25}
                 />
               </ChkImage>
-            </CheckoutButton>
+            </CheckoutButton> */}
           </PaymentsAndBilling>
         </DetailsContainer>
       </MainContainer>

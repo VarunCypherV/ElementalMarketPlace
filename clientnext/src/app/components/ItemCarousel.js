@@ -15,8 +15,18 @@ function ItemCarousel({ topic }) {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/tagcard/tagitems?tagname=${topic}`);
+        if(topic!=="History"){
+          const response = await axios.get(`http://localhost:3000/tagcard/tagitems?tagname=${topic}`);
         setItems(response.data); // Assuming response.data is an array of items
+        }
+        else{
+          const userid = localStorage.getItem('id');
+          const response = await axios.get(`http://localhost:3000/userDeets/getVisited?userid=${userid}`);
+          setItems(response.data.Visited);
+          console.log("response:",response)
+   
+        }
+        
       } catch (error) {
         console.error('Error fetching items:', error);
       }
@@ -25,7 +35,24 @@ function ItemCarousel({ topic }) {
     fetchItems();
   }, [topic]);
 
-  const handleCardClick = (id) => {
+  const handleCardClick = async (id) => {
+    try{
+    const userId = localStorage.getItem('id');
+    const response = await axios.post('http://localhost:3000/userDeets/addToVisited', {
+      userid: userId,
+      itemid: id,
+    });
+
+    if (response.status === 200) {
+      console.log(response.data.message);
+    } else {
+      console.error(response.data.message);
+    }
+  } catch (error) {
+    console.error("Error adding to Visited:", error);
+  }
+
+    //ADD API TO SEND USERID AND ITEMID AND ADD TO VISITED 
     router.push(`/itempage/${id}`);
   };
 
@@ -87,13 +114,14 @@ function ItemCarousel({ topic }) {
     >
       {items.map(item => (
         <div key={item.id} onClick={() => handleCardClick(item.id)}>
+        {console.log(topic,item)}
           <Card
             sp={item.attributes.SP}
             cp={item.attributes.CP}
             name={item.attributes.Name}
             description={item.attributes.Description}
             features={item.attributes.Features}
-            image={"http://localhost:1337" + item.attributes.Images.data[0].attributes.url}
+            image={"http://localhost:1337"+ item.attributes.Images.data[0].attributes.url}
             offer="true"
             offerpercent="70% Off"
             mrp="₹1179"

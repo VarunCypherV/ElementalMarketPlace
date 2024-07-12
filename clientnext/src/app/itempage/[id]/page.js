@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Layout1 from "../../layouts/Layout1";
 import styled from "styled-components";
 import { FaShoppingCart, FaShoppingBag } from "react-icons/fa";
@@ -69,8 +69,28 @@ const ItemPage = () => {
     }
   };
 
-  const handleDirectBuy = () => {
-    // Implement direct buy functionality if needed
+  const handleDirectFav = async () => {
+    try {
+      const userId = localStorage.getItem('id');
+      
+      if (!userId) {
+        console.error("User ID not found in localStorage");
+        return;
+      }
+      
+      const response = await axios.post('http://localhost:3000/userDeets/addToFav', {
+        userid: userId,
+        itemid: id,
+      });
+  
+      if (response.status === 200) {
+        console.log(response.data.message);
+      } else {
+        console.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error adding to Visited:", error);
+    }
   };
 
   return (
@@ -90,10 +110,10 @@ const ItemPage = () => {
           <ImageContentContainer>
             <MainImage src={mainImage} alt="Main item image" />
             <ButtonContainer>
-              <BuyButton onClick={handleDirectBuy}>
+              <FavButton onClick={handleDirectFav}>
                 <FaShoppingBag size={20} style={{ marginRight: "10px" }} />
-                Buy
-              </BuyButton>
+                Add Favourite
+              </FavButton>
               <CartButton onClick={handleAddToCart}>
                 <FaShoppingCart size={20} style={{ marginRight: "10px" }} />
                 Add to Cart
@@ -267,7 +287,7 @@ const ButtonContainer = styled.div`
   margin-top: 50px;
 `;
 
-const BuyButton = styled.div`
+const FavButton = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
