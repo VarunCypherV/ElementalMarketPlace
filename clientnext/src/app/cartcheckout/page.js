@@ -17,6 +17,12 @@ function CartAndCheckoutPage() {
   const [displayPrice, setDisplayPrice] = useState(0);
   const [addresses, setAddresses] = useState([]);
 
+  const [address, setAddress] = useState("");
+
+  const handleSetAddress = (selectedAddress) => {
+    setAddress(selectedAddress);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,28 +30,27 @@ function CartAndCheckoutPage() {
         const response = await axios.get(
           `http://localhost:3000/userDeets/getCart?userid=${userid}`
         );
-    
-        
+
         const cartData = response.data.cart.map((item) => ({
           ...item,
           quantity: 1, // Initialize quantity for each item
         }));
         setCartItems(cartData);
-        
-    
+
         const addressResponse = await axios.get(
           `http://localhost:3000/userDeets/addresses?userId=${userid}`
         );
 
         setAddresses(addressResponse.data);
-        
+
         let quantity = cartData.reduce(
           (total, item) => total + item.quantity,
           0
         ); // Calculate total quantity
-        
+
         let price = cartData.reduce(
-          (total, item) => total + item.attributes.SP * item.quantity,0
+          (total, item) => total + item.attributes.SP * item.quantity,
+          0
         ); // Calculate total price
 
         setTotalQuantity(quantity);
@@ -60,7 +65,6 @@ function CartAndCheckoutPage() {
     fetchData();
   }, []);
 
-  
   const increaseQuantity = (index) => {
     // Increase quantity logic
     const updatedCart = [...cartItems];
@@ -138,6 +142,22 @@ function CartAndCheckoutPage() {
       // Handle error state here
     }
   };
+  const it = cartItems.map((item) => ({
+    id: item.id,
+    quantity: item.quantity,
+  }))
+  const userid = localStorage.getItem("id");
+  useEffect(() => {
+    const userid = localStorage.getItem("id");
+    const deets = {
+      user_id: userid,
+      Items: JSON.stringify(it),
+      Price: totalPrice || "",
+      Address: address || "",
+      PaymentIntent: "",
+    };
+    localStorage.setItem("deets", JSON.stringify(deets));
+  }, [userid,address,totalPrice,cartItems]);
 
   return (
     <Layout1>
@@ -205,6 +225,7 @@ function CartAndCheckoutPage() {
               options={addresses}
               OutsideBoxText="Delivery Address"
               InsideBox="Select Your Delivery Address"
+              onSelect={handleSetAddress} // Pass the callback
             />
 
             <br />
@@ -214,7 +235,7 @@ function CartAndCheckoutPage() {
               onRemoveCoupon={handleRemoveCoupon}
             />
             <Stripe amount={displayPrice} />
-            
+
             {/* <CheckoutButton>
               <h1>Proceed To Checkout</h1>
               <ChkImage>

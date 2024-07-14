@@ -15,7 +15,7 @@ export default function Home(props) {
   const [amount, setAmount] = useState(1);
 
   useEffect(() => {
-    setAmount(props.amount);
+    {props.amount && setAmount(props.amount)};
   }, [props.amount]);
 
   return (
@@ -36,7 +36,7 @@ export default function Home(props) {
           currency: "usd",
         }}
       >
-        <CheckoutPage amount={amount} />
+        <CheckoutPage amount={amount} deets={props.deets}/>
       </Elements>
     </main>
   );

@@ -861,19 +861,21 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     singularName: 'order';
     pluralName: 'orders';
     displayName: 'order';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    user_id: Attribute.Relation<
+    userid: Attribute.Relation<
       'api::order.order',
       'manyToOne',
       'api::user-id.user-id'
     >;
-    ItemsWithQuantity: Attribute.JSON;
-    Price: Attribute.JSON;
-    Payment: Attribute.JSON;
+    Price: Attribute.Float;
+    Address: Attribute.Text;
+    PaymentIntent: Attribute.Text;
+    Items: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

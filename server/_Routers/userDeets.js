@@ -403,7 +403,7 @@ router.get("/getFav", upload.none(), async (req, res) => {
     const userCollection = collectionResponse.data.data.attributes;
     
     const favouritesItems = userCollection.favourites.data;
-    console.log(userCollection.favourites.data)
+
     
     const itemsDetails = await Promise.all(
       favouritesItems.map(async (item) => {

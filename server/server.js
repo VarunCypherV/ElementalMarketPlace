@@ -8,6 +8,8 @@ const tagCardRouter = require('./_Routers/tagcard'); // Adjust the path as
 const reviewsRouter = require('./_Routers/reviews'); // Adjust the path as
 const userDeetsRouter = require('./_Routers/userDeets'); //
 const marketRouter = require('./_Routers/market'); //
+const filtersRouter = require('./_Routers/filters'); //
+
 
 require('dotenv').config();
 
@@ -36,6 +38,7 @@ app.use('/tagcard', tagCardRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/userDeets', userDeetsRouter);
 app.use('/market',marketRouter);
+app.use('/filters', filtersRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

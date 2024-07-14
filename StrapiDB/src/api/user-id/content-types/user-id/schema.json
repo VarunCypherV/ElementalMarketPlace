@@ -19,7 +19,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::order.order",
-      "mappedBy": "user_id"
+      "mappedBy": "userid"
     }
   }
 }

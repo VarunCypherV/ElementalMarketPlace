@@ -4,26 +4,30 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "order"
+    "displayName": "order",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "user_id": {
+    "userid": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::user-id.user-id",
       "inversedBy": "orders"
     },
-    "ItemsWithQuantity": {
-      "type": "json"
-    },
     "Price": {
-      "type": "json"
+      "type": "float"
     },
-    "Payment": {
+    "Address": {
+      "type": "text"
+    },
+    "PaymentIntent": {
+      "type": "text"
+    },
+    "Items": {
       "type": "json"
     }
   }

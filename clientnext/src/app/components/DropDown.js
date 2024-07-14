@@ -11,6 +11,8 @@ const DropdownComp = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newItem, setNewItem] = useState(""); // State to store newly added item
   const [options, setOptions] = useState([]); // State to manage dropdown options
+
+  
   useEffect(() => {
     setSelectedOption(props.InsideBox);
     setOptions(props.options.addresses || []);
@@ -19,6 +21,7 @@ const DropdownComp = (props) => {
   
   const handleSelection = (option) => {
     setSelectedOption(option);
+    props.onSelect(option);  // Pass selected option to parent
   };
 
   const toggleDropdown = () => {
